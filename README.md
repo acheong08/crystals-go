@@ -7,7 +7,7 @@ It contains Kyber, a key-encapsulation mechanism whose goal is to securely trans
 
 To begin with, the crystal-go module can be installed via:
 ```shell
-go get -u github.com/kudelskisecurity/crystals-go
+go get github.com/acheong08/crystals-go
 ```
 
 The API of Kyber and Dilihtium is very similar, and can be divided in two steps:
