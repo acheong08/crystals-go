@@ -93,7 +93,7 @@ for Dilithium.
 
 Finally, we noticed that some packages (for example: [binary](https://golang.org/pkg/encoding/binary/) are only compatible with constant-size objects.
 Our API outputs slices, which are variable-sized arrays, and function calls in Go return non-constant values, breaking the compatibility with such packages.
-For applications where resources need to be allocated using constant-size structures, we hardcode the size of our scheme's outputs for each security level, and expose them as constants as part of the Kyber/Dilithium packages. Have a look at the [param.go](https://github.com/kudelskisecurity/crystals-go/blob/main/crystals-dilithium/params.go#L19) file for an example.
+For applications where resources need to be allocated using constant-size structures, we hardcode the size of our scheme's outputs for each security level, and expose them as constants as part of the Kyber/Dilithium packages. Have a look at the [param.go](https://github.com/acheong08/crystals-go/blob/main/crystals-dilithium/params.go#L19) file for an example.
 
 ### Errors
 
