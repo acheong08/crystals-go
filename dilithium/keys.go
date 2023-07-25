@@ -2,13 +2,13 @@ package dilithium
 
 import "crypto/subtle"
 
-//PublicKey holds the pk strct
+// PublicKey holds the pk strct
 type PublicKey struct {
 	T1  Vec //K
 	Rho [SEEDBYTES]byte
 }
 
-//PrivateKey holds the sk struct
+// PrivateKey holds the sk struct
 type PrivateKey struct {
 	S1  Vec //L
 	S2  Vec //K
@@ -18,22 +18,22 @@ type PrivateKey struct {
 	T0  Vec //K
 }
 
-//SIZEPK returns the size in bytes of the public key of a dilithium instance
+// SIZEPK returns the size in bytes of the public key of a dilithium instance
 func (d *Dilithium) SIZEPK() int {
 	return d.params.SIZEPK
 }
 
-//SIZESK returns the size in bytes of the secret key of a dilithium instance
+// SIZESK returns the size in bytes of the secret key of a dilithium instance
 func (d *Dilithium) SIZESK() int {
 	return d.params.SIZESK
 }
 
-//SIZESIG returns the size in bytes of the signature of a dilithium instance
+// SIZESIG returns the size in bytes of the signature of a dilithium instance
 func (d *Dilithium) SIZESIG() int {
 	return d.params.SIZESIG
 }
 
-//PackPK packs a PublicKey into an array of bytes
+// PackPK packs a PublicKey into an array of bytes
 func (d *Dilithium) PackPK(pk PublicKey) []byte {
 	packedPK := make([]byte, d.params.SIZEPK)
 	copy(packedPK[:SEEDBYTES], pk.Rho[:])
@@ -41,7 +41,7 @@ func (d *Dilithium) PackPK(pk PublicKey) []byte {
 	return packedPK
 }
 
-//UnpackPK reverses the packing operation and outputs a PublicKey struct
+// UnpackPK reverses the packing operation and outputs a PublicKey struct
 func (d *Dilithium) UnpackPK(packedPK []byte) PublicKey {
 	var pk PublicKey
 	copy(pk.Rho[:], packedPK[:SEEDBYTES])
@@ -49,7 +49,7 @@ func (d *Dilithium) UnpackPK(packedPK []byte) PublicKey {
 	return pk
 }
 
-//PackSK packs a PrivateKey into a byte array
+// PackSK packs a PrivateKey into a byte array
 func (d *Dilithium) PackSK(sk PrivateKey) []byte {
 	packedSK := make([]byte, d.params.SIZESK)
 	id := 0
@@ -71,7 +71,7 @@ func (d *Dilithium) PackSK(sk PrivateKey) []byte {
 	return packedSK
 }
 
-//UnpackSK reverses the packing operation and outputs a PrivateKey struct
+// UnpackSK reverses the packing operation and outputs a PrivateKey struct
 func (d *Dilithium) UnpackSK(packedSK []byte) PrivateKey {
 	var sk PrivateKey
 	id := 0

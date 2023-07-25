@@ -4,7 +4,7 @@ import (
 	"golang.org/x/crypto/sha3"
 )
 
-//Poly represents a polynomial of deg n with coefs in [0, Q)
+// Poly represents a polynomial of deg n with coefs in [0, Q)
 type Poly [n]int16
 
 func add(a, b Poly) Poly {
@@ -15,7 +15,7 @@ func add(a, b Poly) Poly {
 	return c
 }
 
-//sub substracts b from a without normalization
+// sub substracts b from a without normalization
 func sub(a, b Poly) Poly {
 	var c Poly
 	for i := 0; i < n; i++ {
@@ -24,21 +24,21 @@ func sub(a, b Poly) Poly {
 	return c
 }
 
-//reduce calls barretReduce on each coef
+// reduce calls barretReduce on each coef
 func (p *Poly) reduce() {
 	for i := 0; i < n; i++ {
 		p[i] = barretReduce(p[i])
 	}
 }
 
-//freeze calls Freeze on each coef
+// freeze calls Freeze on each coef
 func (p *Poly) freeze() {
 	for i := 0; i < n; i++ {
 		p[i] = freeze(p[i])
 	}
 }
 
-//rej fills a with coefs in [0, Q) generated with buf using rejection sampling
+// rej fills a with coefs in [0, Q) generated with buf using rejection sampling
 func rej(a []int16, buf []byte) int {
 	ctr, buflen, alen := 0, len(buf), len(a)
 	for pos := 0; pos+3 <= buflen && ctr < alen; pos += 3 {
@@ -56,7 +56,7 @@ func rej(a []int16, buf []byte) int {
 	return ctr
 }
 
-//polyUniform samples a polynomial with coefs in [0, Q]
+// polyUniform samples a polynomial with coefs in [0, Q]
 func polyUniform(rho []byte, nonce []byte) Poly {
 	var outbuf [shake128Rate]byte
 
@@ -74,7 +74,7 @@ func polyUniform(rho []byte, nonce []byte) Poly {
 	return a
 }
 
-//polyGetNoise samples a polynomial with coefs in [Q-eta, Q+eta]
+// polyGetNoise samples a polynomial with coefs in [Q-eta, Q+eta]
 func polyGetNoise(eta int, seed []byte, nonce byte) Poly {
 	outbuf := make([]byte, eta*n/4)
 	state := sha3.NewShake256()
@@ -91,7 +91,7 @@ func polyGetNoise(eta int, seed []byte, nonce byte) Poly {
 	return p
 }
 
-//polyCBD2 samples a poly using a centered binomial distribution
+// polyCBD2 samples a poly using a centered binomial distribution
 func polyCBD2(outbuf []byte) Poly {
 	var t, d uint32
 	var a, b int16
@@ -111,7 +111,7 @@ func polyCBD2(outbuf []byte) Poly {
 	return p
 }
 
-//polyCBD3 samples a poly using a centered binomial distribution
+// polyCBD3 samples a poly using a centered binomial distribution
 func polyCBD3(outbuf []byte) Poly {
 	var t, d uint32
 	var a, b int16
@@ -132,7 +132,7 @@ func polyCBD3(outbuf []byte) Poly {
 	return p
 }
 
-//polyBaseMul multiplies two polynomials
+// polyBaseMul multiplies two polynomials
 func polyBaseMul(a, b Poly) Poly {
 	var r Poly
 	for i := 0; i < n/4; i++ {
@@ -142,7 +142,7 @@ func polyBaseMul(a, b Poly) Poly {
 	return r
 }
 
-//tomont converts a poly to its montgomery representation
+// tomont converts a poly to its montgomery representation
 func (p *Poly) toMont() {
 	var f int16 = int16((uint64(1) << 32) % uint64(q))
 	for i := 0; i < n; i++ {
@@ -150,7 +150,7 @@ func (p *Poly) toMont() {
 	}
 }
 
-//polyFromMsg converts a msg into polynomial representation
+// polyFromMsg converts a msg into polynomial representation
 func polyFromMsg(msg []byte) Poly {
 	var p Poly
 	for i := 0; i < n/8; i++ {
@@ -162,7 +162,7 @@ func polyFromMsg(msg []byte) Poly {
 	return p
 }
 
-//polyToMsg converts a polynomial to a byte array
+// polyToMsg converts a polynomial to a byte array
 func polyToMsg(p Poly) []byte {
 	msg := make([]byte, 32)
 	var t uint16
@@ -179,7 +179,7 @@ func polyToMsg(p Poly) []byte {
 	return msg
 }
 
-//compress packs a polynomial into a byte array using d bits per coefficient
+// compress packs a polynomial into a byte array using d bits per coefficient
 func (p *Poly) compress(d int) []byte {
 	c := make([]byte, n*d/8)
 	switch d {
@@ -285,7 +285,7 @@ func (p *Poly) compress(d int) []byte {
 	return c[:]
 }
 
-//decompressPoly creates a polynomial based on a compressed array, using d bits per coefficients
+// decompressPoly creates a polynomial based on a compressed array, using d bits per coefficients
 func decompressPoly(c []byte, d int) Poly {
 	var p Poly
 	switch d {

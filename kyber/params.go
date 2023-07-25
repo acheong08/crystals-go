@@ -1,8 +1,8 @@
 package kyber
 
-//The first block of constants define internal parameters.
-//SEEDBYTES holds the lenght in byte of the random number to give as input, if wanted.
-//The remaining constants are exported to allow for fixed-lenght array instantiation. For a given security level, the consts are the same as the output of the k.SIZEX() functions defined in keys.go
+// The first block of constants define internal parameters.
+// SEEDBYTES holds the lenght in byte of the random number to give as input, if wanted.
+// The remaining constants are exported to allow for fixed-lenght array instantiation. For a given security level, the consts are the same as the output of the k.SIZEX() functions defined in keys.go
 const (
 	n            = 256
 	q            = 3329
@@ -29,13 +29,13 @@ const (
 	Kyber1024SizeC     = 1568 //4*352 + 160
 )
 
-//Kyber struct defines the internal parameters to be used given a security level
+// Kyber struct defines the internal parameters to be used given a security level
 type Kyber struct {
 	Name   string
 	params *parameters
 }
 
-//parameters hold all internal varying parameters used in a kyber scheme
+// parameters hold all internal varying parameters used in a kyber scheme
 type parameters struct {
 	K         int
 	ETA1      int
@@ -47,7 +47,7 @@ type parameters struct {
 	SIZEC     int
 }
 
-//NewKyber512 defines a kyber instance with a light security level.
+// NewKyber512 defines a kyber instance with a light security level.
 func NewKyber512() *Kyber {
 	return &Kyber{
 		Name: "Kyber512",
@@ -63,7 +63,7 @@ func NewKyber512() *Kyber {
 		}}
 }
 
-//NewKyber768 defines a kyber instance with a medium security level.
+// NewKyber768 defines a kyber instance with a medium security level.
 func NewKyber768() *Kyber {
 	return &Kyber{
 		Name: "Kyber768",
@@ -79,7 +79,7 @@ func NewKyber768() *Kyber {
 		}}
 }
 
-//NewKyber1024 defines a kyber instance with a very high security level.
+// NewKyber1024 defines a kyber instance with a very high security level.
 func NewKyber1024() *Kyber {
 	return &Kyber{
 		Name: "Kyber1024",
@@ -95,7 +95,7 @@ func NewKyber1024() *Kyber {
 		}}
 }
 
-//NewKyberUnsafe is a skeleton function to be used for research purposes when wanting to use a kyber instance with parameters that differ from the recommended ones.
+// NewKyberUnsafe is a skeleton function to be used for research purposes when wanting to use a kyber instance with parameters that differ from the recommended ones.
 func NewKyberUnsafe(n, k, q, eta1, et2, du, dv int) *Kyber {
 	return &Kyber{
 		Name:   "Custom Kyber",

@@ -1,16 +1,16 @@
 package dilithium
 
-//Vec holds L or K polynomials
+// Vec holds L or K polynomials
 type Vec []Poly
 
-//copy creates a deep copy of a polynomial
+// copy creates a deep copy of a polynomial
 func (v Vec) copy() Vec {
 	u := make(Vec, len(v))
 	copy(u, v)
 	return u
 }
 
-//aecAdd ads two Vec polynomial-wise
+// aecAdd ads two Vec polynomial-wise
 func vecAdd(u, v Vec, L int) Vec {
 	w := make(Vec, L)
 	for i := 0; i < L; i++ {
@@ -19,7 +19,7 @@ func vecAdd(u, v Vec, L int) Vec {
 	return w
 }
 
-//vecAccPointWise performs mutliplication of two vec
+// vecAccPointWise performs mutliplication of two vec
 func vecAccPointWise(u, v Vec, L int) Poly {
 	var w, t Poly
 	for i := 0; i < L; i++ {
@@ -29,7 +29,7 @@ func vecAccPointWise(u, v Vec, L int) Poly {
 	return w
 }
 
-//vecIsBelow return true if all coefs are in [Q-bound, Q+bound]
+// vecIsBelow return true if all coefs are in [Q-bound, Q+bound]
 func (v Vec) vecIsBelow(bound int32, L int) bool {
 	res := true
 	for i := 0; i < L; i++ {
@@ -38,7 +38,7 @@ func (v Vec) vecIsBelow(bound int32, L int) bool {
 	return res
 }
 
-//vecMakeHint calls MakeHint on each poly, and returns the hints and the number of +/-1's
+// vecMakeHint calls MakeHint on each poly, and returns the hints and the number of +/-1's
 func vecMakeHint(u, v Vec, L int, GAMMA2 int32) (Vec, int) {
 	h := make(Vec, L)
 	s := int32(0)
@@ -51,7 +51,7 @@ func vecMakeHint(u, v Vec, L int, GAMMA2 int32) (Vec, int) {
 	return h, int(s)
 }
 
-//equal returns true if u is equal to v
+// equal returns true if u is equal to v
 func (v Vec) equal(u Vec, L int) bool {
 	for i := 0; i < L; i++ {
 		for j := 0; j < n; j++ {
@@ -63,7 +63,7 @@ func (v Vec) equal(u Vec, L int) bool {
 	return true
 }
 
-//sum computes the number of +/-1's in v
+// sum computes the number of +/-1's in v
 func (v Vec) sum(L int) int {
 	sum := 0
 	for i := 0; i < L; i++ {

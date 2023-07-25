@@ -1,9 +1,9 @@
 package kyber
 
-//Vec is an array of K polynomials
+// Vec is an array of K polynomials
 type Vec []Poly
 
-//vecPointWise multiplies two vectors together
+// vecPointWise multiplies two vectors together
 func vecPointWise(u, v Vec, K int) Poly {
 	var r Poly
 	for i := 0; i < K; i++ {
@@ -13,7 +13,7 @@ func vecPointWise(u, v Vec, K int) Poly {
 	return r
 }
 
-//equal returns true iff u and v have the same coefficients
+// equal returns true iff u and v have the same coefficients
 func (v Vec) equal(u Vec, K int) bool {
 	for i := 0; i < K; i++ {
 		for j := 0; j < n; j++ {
@@ -25,7 +25,7 @@ func (v Vec) equal(u Vec, K int) bool {
 	return true
 }
 
-//compress calls compress on each poly of the vec and concatenates their representation in a byte array
+// compress calls compress on each poly of the vec and concatenates their representation in a byte array
 func (v Vec) compress(d int, K int) []byte {
 	polylen := n * d / 8
 	c := make([]byte, K*polylen)
@@ -35,7 +35,7 @@ func (v Vec) compress(d int, K int) []byte {
 	return c[:]
 }
 
-//decompressVec creates K polynomials from their byte representation
+// decompressVec creates K polynomials from their byte representation
 func decompressVec(c []byte, d int, K int) Vec {
 	v := make(Vec, K)
 	for i := 0; i < K; i++ {
@@ -44,7 +44,7 @@ func decompressVec(c []byte, d int, K int) Vec {
 	return v
 }
 
-//pack compress v in a byte array in a loss-less manner
+// pack compress v in a byte array in a loss-less manner
 func pack(v Vec, K int) []byte {
 	var t0, t1 uint16
 	r := make([]byte, K*polysize)
@@ -61,7 +61,7 @@ func pack(v Vec, K int) []byte {
 	return r
 }
 
-//unpack reverses the packing operation
+// unpack reverses the packing operation
 func unpack(r []byte, K int) Vec {
 	v := make(Vec, K)
 	for i := 0; i < K; i++ {

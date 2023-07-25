@@ -1,8 +1,8 @@
 package dilithium
 
-//The first block of constants define internal parameters.
-//SEEDBYTES holds the lenght in byte of the random number to give as input, if wanted.
-//The remaining constants are exported to allow for fixed-lenght array instantiation. For a given security level, the consts are the same as the output of the d.SIZEX() functions defined in keys.go
+// The first block of constants define internal parameters.
+// SEEDBYTES holds the lenght in byte of the random number to give as input, if wanted.
+// The remaining constants are exported to allow for fixed-lenght array instantiation. For a given security level, the consts are the same as the output of the d.SIZEX() functions defined in keys.go
 const (
 	n            = 256
 	q            = 8380417  // 2²³ - 2¹³ + 1
@@ -28,13 +28,13 @@ const (
 	Dilithium5SizeSig = 4595
 )
 
-//Dilithium struct defines the internal parameters to be used given a security level
+// Dilithium struct defines the internal parameters to be used given a security level
 type Dilithium struct {
 	Name   string
 	params *parameters
 }
 
-//parameters hold all internal varying parameters used in a dilithium scheme
+// parameters hold all internal varying parameters used in a dilithium scheme
 type parameters struct {
 	T          int
 	K          int
@@ -53,7 +53,7 @@ type parameters struct {
 	RANDOMIZED int //deterministic or randomized signature
 }
 
-//NewDilithium2 defines a dilithium instance with a light security level. The signature is randomized expect if a false boolean is given as argument.
+// NewDilithium2 defines a dilithium instance with a light security level. The signature is randomized expect if a false boolean is given as argument.
 func NewDilithium2(randomized ...bool) *Dilithium {
 	r := 1 //randomized by default
 	if len(randomized) == 1 && !randomized[0] {
@@ -80,7 +80,7 @@ func NewDilithium2(randomized ...bool) *Dilithium {
 		}}
 }
 
-//NewDilithium3 defines a dilithium instance with a medium security level. The signature is randomized expect if a false boolean is given as argument.
+// NewDilithium3 defines a dilithium instance with a medium security level. The signature is randomized expect if a false boolean is given as argument.
 func NewDilithium3(randomized ...bool) *Dilithium {
 	r := 1 //randomized by default
 	if len(randomized) == 1 && !randomized[0] {
@@ -107,7 +107,7 @@ func NewDilithium3(randomized ...bool) *Dilithium {
 		}}
 }
 
-//NewDilithium5 defines a dilithium instance with a very high security level. The signature is randomized expect if a false boolean is given as argument.
+// NewDilithium5 defines a dilithium instance with a very high security level. The signature is randomized expect if a false boolean is given as argument.
 func NewDilithium5(randomized ...bool) *Dilithium {
 	r := 1 //randomized by default
 	if len(randomized) == 1 && !randomized[0] {
@@ -134,7 +134,7 @@ func NewDilithium5(randomized ...bool) *Dilithium {
 		}}
 }
 
-//NewDilithiumUnsafe is a skeleton function to be used for research purposes when wanting to use a dilithium instance with parameters that differ from the recommended ones.
+// NewDilithiumUnsafe is a skeleton function to be used for research purposes when wanting to use a dilithium instance with parameters that differ from the recommended ones.
 func NewDilithiumUnsafe(q, d, tau, gamma1, gamma2, k, l, eta, omega int) *Dilithium {
 	return &Dilithium{
 		Name:   "Custom Dilithium",

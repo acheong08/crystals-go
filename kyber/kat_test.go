@@ -12,7 +12,7 @@ import (
 	"testing"
 )
 
-//helpers (see NIST's PQCgenKAT.c)
+// helpers (see NIST's PQCgenKAT.c)
 type randomBytes struct {
 	key [32]byte
 	v   [16]byte
