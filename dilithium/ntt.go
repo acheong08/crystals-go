@@ -37,7 +37,7 @@ var zetas = [n]int32{
 
 var f = int32(41978) //int32(((uint64(MONT) * MONT % Q) * (Q - 1) % Q) * ((Q - 1) >> 8) % Q)
 
-//ntt performs in place forward NTT
+// ntt performs in place forward NTT
 func (p *Poly) ntt() {
 	var len, start, j, k uint
 	var zeta, t int32
@@ -56,7 +56,7 @@ func (p *Poly) ntt() {
 	}
 }
 
-//invntt perfors in place backward NTT and multiplication by Montgomery factor 2^32.
+// invntt perfors in place backward NTT and multiplication by Montgomery factor 2^32.
 func (p *Poly) invntt() {
 	var len, start, j, k uint
 	var zeta, t int32
@@ -80,14 +80,14 @@ func (p *Poly) invntt() {
 	}
 }
 
-//ntt performs in place NTT
+// ntt performs in place NTT
 func (v Vec) ntt(L int) {
 	for i := 0; i < L; i++ {
 		v[i].ntt()
 	}
 }
 
-//fqmul performs a multiplication in the Montgomery domain
+// fqmul performs a multiplication in the Montgomery domain
 func fqmul(a, b int32) int32 {
 	return montgomeryReduce(int64(a) * int64(b))
 }

@@ -8,9 +8,9 @@ import (
 	"golang.org/x/crypto/sha3"
 )
 
-//KeyGen creates a public and private key pair.
-//A 32 byte long seed can be given as argument. If a nil seed is given, the seed is generated using Go crypto's random number generator.
-//The keys returned are packed into byte arrays.
+// KeyGen creates a public and private key pair.
+// A 32 byte long seed can be given as argument. If a nil seed is given, the seed is generated using Go crypto's random number generator.
+// The keys returned are packed into byte arrays.
 func (d *Dilithium) KeyGen(seed []byte) ([]byte, []byte) {
 
 	if seed == nil || len(seed) != SEEDBYTES {
@@ -62,10 +62,10 @@ func (d *Dilithium) KeyGen(seed []byte) ([]byte, []byte) {
 	return d.PackPK(PublicKey{T1: t1, Rho: rho}), d.PackSK(PrivateKey{Rho: rho, Key: key, Tr: tr, S1: s1, S2: s2, T0: t0})
 }
 
-//Sign produces a signature on the given msg using the secret signing key.
-//The signing key must be given as packed byte array.
-//The message should also be a byte array.
-//The returned signature is packed into a byte array. If an error occurs during the signature process, a nil signature is returned.
+// Sign produces a signature on the given msg using the secret signing key.
+// The signing key must be given as packed byte array.
+// The message should also be a byte array.
+// The returned signature is packed into a byte array. If an error occurs during the signature process, a nil signature is returned.
 func (d *Dilithium) Sign(packedSK, msg []byte) []byte {
 	if len(packedSK) != d.SIZESK() {
 		println("Cannot sign with this key.")
@@ -188,11 +188,11 @@ rej:
 	return d.PackSig(z, h, hc[:])
 }
 
-//Verify uses the verification key to verify a signature given a msg.
-//The public key and signature must be given as packed byte arrays.
-//The message should be a byte array.
-//The result of the verificatino is returned as a boolean, true is the verificatino succeeded, false otherwise.
-//If an error occurs during the verification, a false is returned.
+// Verify uses the verification key to verify a signature given a msg.
+// The public key and signature must be given as packed byte arrays.
+// The message should be a byte array.
+// The result of the verificatino is returned as a boolean, true is the verificatino succeeded, false otherwise.
+// If an error occurs during the verification, a false is returned.
 func (d *Dilithium) Verify(packedPK, msg, sig []byte) bool {
 	if len(sig) != d.SIZESIG() || len(packedPK) != d.SIZEPK() {
 		return false
