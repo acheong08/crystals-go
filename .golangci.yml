@@ -1,6 +1,6 @@
 linters-settings:
   goimports:
-    local-prefixes: github.com/kudelskisecurity/crystals-go
+    local-prefixes: github.com/acheong08/crystals-go
 
 linters:
   disable-all: true
