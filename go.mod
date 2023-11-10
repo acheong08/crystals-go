@@ -1,4 +1,4 @@
-module github.com/acheong08/crystals-go
+module github.com/g-utils/crystals-go
 
 go 1.19
 
